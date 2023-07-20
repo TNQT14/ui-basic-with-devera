@@ -75,10 +75,18 @@ class Home extends StatelessWidget {
                       ),
                     ),
                     Container(
+                      alignment: Alignment.topLeft,
                       margin: EdgeInsets.only(bottom: 10,left: 5, right: 5),
-                      child: Row(
+                      child: Wrap(
+                        direction: Axis.horizontal,
+                        verticalDirection: VerticalDirection.up,
                         children: <Widget>[
-                          ChartBar(label: 'label', amoutSpent: 42, mostExpensive: 60),
+                          ChartBar(label: 'label', amoutSpent: 52, mostExpensive: 60),
+                          ChartBar(label: 'label', amoutSpent: 82, mostExpensive: 60),
+                          ChartBar(label: 'label[0]', amoutSpent: 52, mostExpensive: 60),
+                          ChartBar(label: 'label[0]', amoutSpent: 32, mostExpensive: 60),
+                          ChartBar(label: 'label[0]', amoutSpent: 42, mostExpensive: 60),
+                          ChartBar(label: 'label[0]', amoutSpent: 62, mostExpensive: 60),
                         ],
                       ),
                     ),
