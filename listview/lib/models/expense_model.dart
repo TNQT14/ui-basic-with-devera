@@ -4,5 +4,3 @@ class Expense {
 
   const Expense({this.name = "", this.cost = 0.0});
 }
-
-class 

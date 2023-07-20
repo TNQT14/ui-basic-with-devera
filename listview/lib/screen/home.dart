@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:listview/screen/chartBar.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+
+  final List<double> expense;
+  final List<String> weekLabels = const[];
+  const Home({Key? key, required this.expense}):super(key:key);
+
+  final List<String> weekLabel = const[
+    'Su',
+    'Mo',
+    'Tu',
+    'We',
+    'Th',
+    'Fr',
+    'Sa'];
+
+  List<Widget> _buildWeekSpendingList()
+  {
+    return [];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +74,14 @@ class Home extends StatelessWidget {
                         ],
                       ),
                     ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 10,left: 5, right: 5),
+                      child: Row(
+                        children: <Widget>[
+                          ChartBar(label: 'label', amoutSpent: 42, mostExpensive: 60),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -66,4 +92,3 @@ class Home extends StatelessWidget {
     );
   }
 }
-
