@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'data/data.dart';
 import 'screen/home.dart';
 
 void main() {
@@ -12,8 +12,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    List<double> aaa = weeklySpending as List<double>;
     return MaterialApp(
-     home: Home(expense: [10,100,1000]),
+     home: Home(expense: aaa),
       );
   }
 }

@@ -3,4 +3,5 @@ class Expense {
   final double cost;
 
   const Expense({this.name = "", this.cost = 0.0});
+
 }

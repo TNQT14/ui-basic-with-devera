@@ -16,13 +16,23 @@ class Home extends StatelessWidget {
     'Fr',
     'Sa'];
 
-  List<Widget> _buildWeekSpendingList()
-  {
-    return [];
+  List<Widget> _buildWeekSpendingList(){
+    // double mostExpensive = expense.max();
+    double mostExpensive = expense.reduce((value, element)
+                                          => value > element ? value : element);
+
+    List<Widget> weeklySpendingList = [];
+    for(int i=0; i<expense.length; i++)
+      weeklySpendingList.add(ChartBar(label: weekLabel[i],
+          amoutSpent: expense[i],
+          mostExpensive: mostExpensive));
+    return weeklySpendingList;
   }
 
   @override
   Widget build(BuildContext context) {
+
+    // _buildWeekSpendingList();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -75,18 +85,22 @@ class Home extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      alignment: Alignment.topLeft,
-                      margin: EdgeInsets.only(bottom: 10,left: 5, right: 5),
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(bottom: 10,left: 5),
+                      // padding: EdgeInsets.all(30),
                       child: Wrap(
-                        direction: Axis.horizontal,
-                        verticalDirection: VerticalDirection.up,
+                        crossAxisAlignment: WrapCrossAlignment.end,
+                        spacing: 1,
+                        // direction: Axis.horizontal,
+                        // verticalDirection: VerticalDirection.up,
                         children: <Widget>[
-                          ChartBar(label: 'label', amoutSpent: 52, mostExpensive: 60),
-                          ChartBar(label: 'label', amoutSpent: 82, mostExpensive: 60),
-                          ChartBar(label: 'label[0]', amoutSpent: 52, mostExpensive: 60),
-                          ChartBar(label: 'label[0]', amoutSpent: 32, mostExpensive: 60),
-                          ChartBar(label: 'label[0]', amoutSpent: 42, mostExpensive: 60),
-                          ChartBar(label: 'label[0]', amoutSpent: 62, mostExpensive: 60),
+                          ..._buildWeekSpendingList(),
+                          // ChartBar(label: 'label', amoutSpent: 52, mostExpensive: 60),
+                          // ChartBar(label: 'label', amoutSpent: 82, mostExpensive: 60),
+                          // ChartBar(label: 'label[0]', amoutSpent: 52, mostExpensive: 60),
+                          // ChartBar(label: 'label[0]', amoutSpent: 32, mostExpensive: 60),
+                          // ChartBar(label: 'label[0]', amoutSpent: 42, mostExpensive: 60),
+                          // ChartBar(label: 'label[0]', amoutSpent: 62, mostExpensive: 60),
                         ],
                       ),
                     ),
