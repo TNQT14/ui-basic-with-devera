@@ -12,9 +12,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    List<double> aaa = weeklySpending as List<double>;
+    // List<double> aaa = weeklySpending as List<double>;
+
     return MaterialApp(
-     home: Home(expense: aaa),
+     home: Home(expense: weeklySpending, categories: categories),
       );
   }
 }

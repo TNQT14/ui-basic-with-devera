@@ -30,7 +30,7 @@ class ChartBar extends StatelessWidget{
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        Text('Su',style: TextStyle(fontWeight: FontWeight.bold),),
+        Text('$label',style: TextStyle(fontWeight: FontWeight.bold),),
       ],
     );
   }

@@ -27,13 +27,27 @@ _generateExpenses() {
   return expenses;
 }
 
+totalExpenses(List<Expense> expenses){
+  double total = 0;
+  for (int i=0; i<expenses.length;i++){
+    total+=expenses[i].cost;
+  }
+  return total;
+}
+
 List<Category> categories = [
-  Category(name: 'Food', maxAmount: 450, expenses: _generateExpenses()),
-  Category(name: 'Clothing', maxAmount: 500, expenses: _generateExpenses()),
-  Category(name: 'Utilities', maxAmount: 600, expenses: _generateExpenses()),
+  Category(name: 'Food', maxAmount: 450, expenses: _generateExpenses(),
+      total: totalExpenses(_generateExpenses())),
+  Category(name: 'Clothing', maxAmount: 500, expenses: _generateExpenses(),
+      total: totalExpenses(_generateExpenses())),
+  Category(name: 'Utilities', maxAmount: 600, expenses: _generateExpenses(),
+      total:totalExpenses(_generateExpenses())),
   Category(
-      name: 'Entertainment', maxAmount: 330, expenses: _generateExpenses()),
+      name: 'Entertainment', maxAmount: 330, expenses: _generateExpenses(),
+      total: totalExpenses(_generateExpenses())),
   Category(
-      name: 'Transportation', maxAmount: 500, expenses: _generateExpenses()),
-  Category(name: 'Housing', maxAmount: 1000, expenses: _generateExpenses()),
+      name: 'Transportation', maxAmount: 500, expenses: _generateExpenses(),
+      total: totalExpenses(_generateExpenses())),
+  Category(name: 'Housing', maxAmount: 1000, expenses: _generateExpenses(),
+      total:totalExpenses(_generateExpenses())),
 ];

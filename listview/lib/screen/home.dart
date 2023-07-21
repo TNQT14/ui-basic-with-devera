@@ -1,11 +1,15 @@
+
 import 'package:flutter/material.dart';
 import 'package:listview/screen/chartBar.dart';
+
+import '../models/category_model.dart';
 
 class Home extends StatelessWidget {
 
   final List<double> expense;
+  final List<Category> categories;
   final List<String> weekLabels = const[];
-  const Home({Key? key, required this.expense}):super(key:key);
+  const Home({Key? key, required this.expense, required this.categories}):super(key:key);
 
   final List<String> weekLabel = const[
     'Su',
@@ -28,6 +32,90 @@ class Home extends StatelessWidget {
           mostExpensive: mostExpensive));
     return weeklySpendingList;
   }
+
+  List<Widget> _weeklySpengdingCategory(){
+
+    List<Widget> weeklySpengdingCategory = [];
+    for (int i=0;i<categories.length;i++) {
+      weeklySpengdingCategory.add(Column(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Container(
+              padding: EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    child: Text('${categories[i].name}',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  ),
+                  Container(
+                    child: Text('\$${categories[i].total.toStringAsFixed(2)}/\$${categories[i].maxAmount}',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 8,),
+        ],
+      )
+      );
+    }
+
+    print('Xong for');
+    return weeklySpengdingCategory;
+  }
+
+  // List<Widget> _weeklySpengdingCategory() {
+  //   List<Widget> weeklySpengdingCategory = [];
+  //   print('Chạy hàm _weeklySpengdingCategory');
+  //   for (int i = 0; i < categories.length; i++) {
+  //     weeklySpengdingCategory.add(
+  //       Column(
+  //         children: [
+  //           SizedBox(height: 100), // Khoảng cách 100 pixels giữa các Container
+  //           Container(
+  //             decoration: BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: BorderRadius.circular(10),
+  //             ),
+  //             child: Container(
+  //               padding: EdgeInsets.all(8),
+  //               child: Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                 children: <Widget>[
+  //                   Container(
+  //                     child: Text(
+  //                       '${categories[i].name}',
+  //                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+  //                     ),
+  //                   ),
+  //                   Container(
+  //                     child: Text(
+  //                       '\$-----/\$${categories[i].maxAmount}',
+  //                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   }
+  //
+  //   print('Xong for');
+  //   return weeklySpengdingCategory;
+  // }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -90,23 +178,42 @@ class Home extends StatelessWidget {
                       // padding: EdgeInsets.all(30),
                       child: Wrap(
                         crossAxisAlignment: WrapCrossAlignment.end,
-                        spacing: 1,
+                        spacing: 10,
                         // direction: Axis.horizontal,
                         // verticalDirection: VerticalDirection.up,
                         children: <Widget>[
                           ..._buildWeekSpendingList(),
-                          // ChartBar(label: 'label', amoutSpent: 52, mostExpensive: 60),
-                          // ChartBar(label: 'label', amoutSpent: 82, mostExpensive: 60),
-                          // ChartBar(label: 'label[0]', amoutSpent: 52, mostExpensive: 60),
-                          // ChartBar(label: 'label[0]', amoutSpent: 32, mostExpensive: 60),
-                          // ChartBar(label: 'label[0]', amoutSpent: 42, mostExpensive: 60),
-                          // ChartBar(label: 'label[0]', amoutSpent: 62, mostExpensive: 60),
                         ],
                       ),
                     ),
                   ],
                 ),
               ),
+              SizedBox(height: 8),
+              ..._weeklySpengdingCategory(),
+              // Container(
+              //   decoration: BoxDecoration(
+              //     color: Colors.white,
+              //     borderRadius: BorderRadius.circular(10),
+              //   ),
+              //   child: Container(
+              //     padding: EdgeInsets.all(8),
+              //     child: Row(
+              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //       children: <Widget>[
+              //         ..._weeklySpengdingCategory(),
+              //         Container(
+              //           child: Text('${categories[0].name}',
+              //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              //         ),
+              //         Container(
+              //           child: Text('\$-----/\$${categories[0].maxAmount}',
+              //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              //         ),
+              //       ],
+              //     ),
+              // ),
+              // ),
             ],
           ),
         ),
