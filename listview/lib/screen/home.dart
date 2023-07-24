@@ -147,88 +147,111 @@ class Home extends StatelessWidget {
           ))
         ],
       ),
-      body: Container(
-        color: Colors.grey.shade200,
-        child: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.all(10),
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      height: 50,
-                      child: Center(
-                        child: Text('Weekly Spending',
-                          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                        ),
-                      ),),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back)),
-                          Container(
-                            child: Text('Jun 05, 2023 - Jun 11, 2023', style: TextStyle(fontSize: 20),),
-                          ),
-                          IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward)),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.only(bottom: 10,left: 5),
-                      // padding: EdgeInsets.all(30),
-                      child: Wrap(
-                        crossAxisAlignment: WrapCrossAlignment.end,
-                        spacing: 10,
-                        // direction: Axis.horizontal,
-                        // verticalDirection: VerticalDirection.up,
-                        children: <Widget>[
-                          ..._buildWeekSpendingList(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            forceElevated: true,
+            pinned: true,
+            expandedHeight: 200,
+            leading: IconButton(
+              onPressed: (){},
+              icon: const Icon(
+                Icons.settings,
+                color: Colors.white,
+                size: 30,
               ),
-              SizedBox(height: 8),
-              ..._weeklySpengdingCategory(context, screenWidth),
-              Center(
-                child: Container(
-                  child: Text('Make with TNQT by devera.vn'),
-                ),
-              ),
-              // Container(
-              //   decoration: BoxDecoration(
-              //     color: Colors.white,
-              //     borderRadius: BorderRadius.circular(10),
-              //   ),
-              //   child: Container(
-              //     padding: EdgeInsets.all(8),
-              //     child: Row(
-              //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //       children: <Widget>[
-              //         ..._weeklySpengdingCategory(),
-              //         Container(
-              //           child: Text('${categories[0].name}',
-              //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-              //         ),
-              //         Container(
-              //           child: Text('\$-----/\$${categories[0].maxAmount}',
-              //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-              //         ),
-              //       ],
-              //     ),
-              // ),
-              // ),
-            ],
+            ),
+            flexibleSpace: const FlexibleSpaceBar(
+              title: Text('Simple Budget', style: TextStyle(fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color: Colors.white),
+            ),
           ),
-        ),
+          ),
+        ],
+        // child: Container(
+        //   color: Colors.grey.shade200,
+        //   child: SafeArea(
+        //     child: ListView(
+        //       padding: const EdgeInsets.all(10),
+        //       children: <Widget>[
+        //         Container(
+        //           decoration: BoxDecoration(
+        //             color: Colors.white,
+        //             borderRadius: BorderRadius.circular(10),
+        //           ),
+        //           child: Column(
+        //             children: <Widget>[
+        //               Container(
+        //                 height: 50,
+        //                 child: Center(
+        //                   child: Text('Weekly Spending',
+        //                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        //                   ),
+        //                 ),),
+        //               Container(
+        //                 child: Row(
+        //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                   children: <Widget>[
+        //                     IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back)),
+        //                     Container(
+        //                       child: Text('Jun 05, 2023 - Jun 11, 2023', style: TextStyle(fontSize: 20),),
+        //                     ),
+        //                     IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward)),
+        //                   ],
+        //                 ),
+        //               ),
+        //               Container(
+        //                 alignment: Alignment.center,
+        //                 margin: EdgeInsets.only(bottom: 10,left: 5),
+        //                 // padding: EdgeInsets.all(30),
+        //                 child: Wrap(
+        //                   crossAxisAlignment: WrapCrossAlignment.end,
+        //                   spacing: 10,
+        //                   // direction: Axis.horizontal,
+        //                   // verticalDirection: VerticalDirection.up,
+        //                   children: <Widget>[
+        //                     ..._buildWeekSpendingList(),
+        //                   ],
+        //                 ),
+        //               ),
+        //             ],
+        //           ),
+        //         ),
+        //         SizedBox(height: 8),
+        //         ..._weeklySpengdingCategory(context, screenWidth),
+        //         Center(
+        //           child: Container(
+        //             child: Text('Make with TNQT by devera.vn'),
+        //           ),
+        //         ),
+        //         // Container(
+        //         //   decoration: BoxDecoration(
+        //         //     color: Colors.white,
+        //         //     borderRadius: BorderRadius.circular(10),
+        //         //   ),
+        //         //   child: Container(
+        //         //     padding: EdgeInsets.all(8),
+        //         //     child: Row(
+        //         //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //         //       children: <Widget>[
+        //         //         ..._weeklySpengdingCategory(),
+        //         //         Container(
+        //         //           child: Text('${categories[0].name}',
+        //         //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+        //         //         ),
+        //         //         Container(
+        //         //           child: Text('\$-----/\$${categories[0].maxAmount}',
+        //         //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+        //         //         ),
+        //         //       ],
+        //         //     ),
+        //         // ),
+        //         // ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ),
     );
   }

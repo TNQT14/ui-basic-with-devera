@@ -15,6 +15,7 @@ class Detail extends StatelessWidget {
     for(int i=0; i<category.expenses.length;i++)
       {
         itemList.add(Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
               padding: const EdgeInsets.all(8),
