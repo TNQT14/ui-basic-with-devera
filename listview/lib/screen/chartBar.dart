@@ -24,7 +24,7 @@ class ChartBar extends StatelessWidget{
         const SizedBox(height: 6.0,),
         Container(
           height: barHeight,
-          width: 20,
+          width: 15,
           decoration: BoxDecoration(
             color: Colors.green,
             borderRadius: BorderRadius.circular(10),

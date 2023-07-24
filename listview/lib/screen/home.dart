@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:listview/screen/chartBar.dart';
 
 import '../models/category_model.dart';
+import 'package:listview/screen/detailCategory.dart';
 
 class Home extends StatelessWidget {
 
@@ -33,30 +33,81 @@ class Home extends StatelessWidget {
     return weeklySpendingList;
   }
 
-  List<Widget> _weeklySpengdingCategory(){
+  List<Widget> _weeklySpengdingCategory(BuildContext context ,double screenWidth){
+    late double barWeight;
+    late double percent;
+    late Color colorChart;
 
     List<Widget> weeklySpengdingCategory = [];
     for (int i=0;i<categories.length;i++) {
+      percent = categories[i].total/categories[i].maxAmount;
+      barWeight = percent*(screenWidth-60);
+
+    //Color for chart
+      if(percent<0.25)
+        colorChart=Colors.red;
+      else if(percent>0.5)
+        colorChart = Colors.green;
+      else
+        colorChart = Colors.orange;
+
+      print('${categories[i].name} : $barWeight');
+
       weeklySpengdingCategory.add(Column(
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
+          InkWell(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (builder)=>Detail(category: categories[i])));
+            },
             child: Container(
-              padding: EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    child: Text('${categories[i].name}',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          child: Text('${categories[i].name}',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                        ),
+                        Container(
+                          child: Text('\$${categories[i].total.toStringAsFixed(2)}/\$${categories[i].maxAmount}',
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                        ),
+                      ],
+                    ),
                   ),
-                  Container(
-                    child: Text('\$${categories[i].total.toStringAsFixed(2)}/\$${categories[i].maxAmount}',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                  ),
+                 Stack(
+                   children: [
+                     Container(
+                       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                       height: 15,
+                       width: double.infinity,
+                       alignment: Alignment(10, 10),
+                       decoration: BoxDecoration(
+                         color: Colors.grey.shade200,
+                         borderRadius: BorderRadius.circular(10),
+                       ),
+                     ),
+                     Container(
+                       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                       height: 15,
+                       width: barWeight,
+                       alignment: Alignment(10, 10),
+                       decoration: BoxDecoration(
+                         color: colorChart,
+                         borderRadius: BorderRadius.circular(10),
+                       ),
+                     ),
+                   ],
+                 )
                 ],
               ),
             ),
@@ -66,60 +117,16 @@ class Home extends StatelessWidget {
       )
       );
     }
-
     print('Xong for');
     return weeklySpengdingCategory;
   }
 
-  // List<Widget> _weeklySpengdingCategory() {
-  //   List<Widget> weeklySpengdingCategory = [];
-  //   print('Chạy hàm _weeklySpengdingCategory');
-  //   for (int i = 0; i < categories.length; i++) {
-  //     weeklySpengdingCategory.add(
-  //       Column(
-  //         children: [
-  //           SizedBox(height: 100), // Khoảng cách 100 pixels giữa các Container
-  //           Container(
-  //             decoration: BoxDecoration(
-  //               color: Colors.white,
-  //               borderRadius: BorderRadius.circular(10),
-  //             ),
-  //             child: Container(
-  //               padding: EdgeInsets.all(8),
-  //               child: Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //                 children: <Widget>[
-  //                   Container(
-  //                     child: Text(
-  //                       '${categories[i].name}',
-  //                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     child: Text(
-  //                       '\$-----/\$${categories[i].maxAmount}',
-  //                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  //
-  //   print('Xong for');
-  //   return weeklySpengdingCategory;
-  // }
-
-
-
-
   @override
   Widget build(BuildContext context) {
 
+    Size screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
     // _buildWeekSpendingList();
     return Scaffold(
       appBar: AppBar(
@@ -144,7 +151,7 @@ class Home extends StatelessWidget {
         color: Colors.grey.shade200,
         child: SafeArea(
           child: ListView(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(10),
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
@@ -190,7 +197,12 @@ class Home extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 8),
-              ..._weeklySpengdingCategory(),
+              ..._weeklySpengdingCategory(context, screenWidth),
+              Center(
+                child: Container(
+                  child: Text('Make with TNQT by devera.vn'),
+                ),
+              ),
               // Container(
               //   decoration: BoxDecoration(
               //     color: Colors.white,
