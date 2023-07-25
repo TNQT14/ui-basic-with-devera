@@ -139,6 +139,7 @@ class Home extends StatelessWidget {
           child: Column(
             children: <Widget>[
               ListView(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true, // Thêm shrinkWrap cho ListView
                 padding: const EdgeInsets.all(10),
                 children: <Widget>[
