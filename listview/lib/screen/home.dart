@@ -123,6 +123,79 @@ class Home extends StatelessWidget {
     return weeklySpengdingCategory;
   }
 
+  List<Widget> _bodySimpleBudget(BuildContext context, double screenWidth) {
+    List<Widget> bodySimpleBudget = [];
+
+    bodySimpleBudget.add(
+      Container(
+        color: Colors.grey.shade200,
+        child: SingleChildScrollView( // Thay thế Expanded bằng SingleChildScrollView
+          child: Column(
+            children: <Widget>[
+              ListView(
+                shrinkWrap: true, // Thêm shrinkWrap cho ListView
+                padding: const EdgeInsets.all(10),
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          height: 50,
+                          child: const Center(
+                            child: Text(
+                              'Weekly Spending',
+                              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
+                            Container(
+                              child: Text(
+                                'Jun 05, 2023 - Jun 11, 2023',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                            ),
+                            IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward)),
+                          ],
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(bottom: 10, left: 5),
+                          child: Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.end,
+                            spacing: 10,
+                            children: <Widget>[
+                              ..._buildWeekSpendingList(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  ..._weeklySpengdingCategory(context, screenWidth),
+                  const Center(
+                    child: Text('Make with TNQT by devera.vn'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    return bodySimpleBudget;
+  }
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -131,24 +204,24 @@ class Home extends StatelessWidget {
     double screenHeight = screenSize.height;
     // _buildWeekSpendingList();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        leading: Icon(Icons.settings,
-          color: Colors.white,
-          size: 30,),
-        title: Container(
-            child: Center(
-                child: const Text('Simple Budet',
-                  style: TextStyle(fontSize: 30),
-                ))),
-        actions: [
-          IconButton(onPressed: (){}, icon: Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 30,
-          ))
-        ],
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.green,
+      //   leading: Icon(Icons.settings,
+      //     color: Colors.white,
+      //     size: 30,),
+      //   title: Container(
+      //       child: Center(
+      //           child: const Text('Simple Budet',
+      //             style: TextStyle(fontSize: 30),
+      //           ))),
+      //   actions: [
+      //     IconButton(onPressed: (){}, icon: Icon(
+      //       Icons.add,
+      //       color: Colors.white,
+      //       size: 30,
+      //     ))
+      //   ],
+      // ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -170,8 +243,101 @@ class Home extends StatelessWidget {
             ),
               background: ImageWithTopShadowWidget(),
           ),
-
+            actions: [
+              IconButton(onPressed: (){}, icon: Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 30,
+                ))
+              ],
+            backgroundColor: Colors.green,
           ),
+          SliverList(delegate: SliverChildListDelegate(
+            // Container(
+            //   color: Colors.grey.shade200,
+            //   child: SafeArea(
+            //     child: ListView(
+            //       padding: const EdgeInsets.all(10),
+            //       children: <Widget>[
+            //         Container(
+            //           decoration: BoxDecoration(
+            //             color: Colors.white,
+            //             borderRadius: BorderRadius.circular(10),
+            //           ),
+            //           child: Column(
+            //             children: <Widget>[
+            //               Container(
+            //                 height: 50,
+            //                 child: Center(
+            //                   child: Text('Weekly Spending',
+            //                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            //                   ),
+            //                 ),),
+            //               Container(
+            //                 child: Row(
+            //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                   children: <Widget>[
+            //                     IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back)),
+            //                     Container(
+            //                       child: Text('Jun 05, 2023 - Jun 11, 2023', style: TextStyle(fontSize: 20),),
+            //                     ),
+            //                     IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward)),
+            //                   ],
+            //                 ),
+            //               ),
+            //               Container(
+            //                 alignment: Alignment.center,
+            //                 margin: EdgeInsets.only(bottom: 10,left: 5),
+            //                 // padding: EdgeInsets.all(30),
+            //                 child: Wrap(
+            //                   crossAxisAlignment: WrapCrossAlignment.end,
+            //                   spacing: 10,
+            //                   // direction: Axis.horizontal,
+            //                   // verticalDirection: VerticalDirection.up,
+            //                   children: <Widget>[
+            //                     ..._buildWeekSpendingList(),
+            //                   ],
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //         SizedBox(height: 8),
+            //         ..._weeklySpengdingCategory(context, screenWidth),
+            //         Center(
+            //           child: Container(
+            //             child: Text('Make with TNQT by devera.vn'),
+            //           ),
+            //         ),
+            //         // Container(
+            //         //   decoration: BoxDecoration(
+            //         //     color: Colors.white,
+            //         //     borderRadius: BorderRadius.circular(10),
+            //         //   ),
+            //         //   child: Container(
+            //         //     padding: EdgeInsets.all(8),
+            //         //     child: Row(
+            //         //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         //       children: <Widget>[
+            //         //         ..._weeklySpengdingCategory(),
+            //         //         Container(
+            //         //           child: Text('${categories[0].name}',
+            //         //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            //         //         ),
+            //         //         Container(
+            //         //           child: Text('\$-----/\$${categories[0].maxAmount}',
+            //         //             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            //         //         ),
+            //         //       ],
+            //         //     ),
+            //         // ),
+            //         // ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
+            _bodySimpleBudget(context, screenWidth),
+          ))
         ],
         // child: Container(
         //   color: Colors.grey.shade200,
