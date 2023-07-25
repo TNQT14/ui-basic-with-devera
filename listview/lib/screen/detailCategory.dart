@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 import '../models/expense_model.dart';
 import '../models/category_model.dart';
@@ -56,7 +57,7 @@ class Detail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(category.name);
+    double percent = category.total/category.maxAmount;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -77,9 +78,50 @@ class Detail extends StatelessWidget {
         color: Colors.grey.shade200,
         child: ListView(
           padding: const EdgeInsets.all(8),
-
           children: <Widget>[
-            SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow:[ BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  offset: Offset(0, 3),
+                ),],
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    height: 200,
+                    alignment: Alignment.center,
+                    child: Text('\$${category.total.toStringAsFixed(2)}/\$${category.maxAmount}',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
+                    ),
+                  ),
+                   Container(
+                     height: 200,
+                    alignment: Alignment.center,
+                    child: Center(
+                      child: Transform.scale(
+                        scale: 5,
+                        child: CircularPercentIndicator(
+                          radius: 45,
+                          backgroundColor: Colors.grey,
+                          percent: percent,
+                          lineWidth: 3,
+                          progressColor: Colors.green,
+                          circularStrokeCap: CircularStrokeCap.round,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
             ..._detailCategory(),
           ],
         ),
