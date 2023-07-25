@@ -4,6 +4,8 @@ import 'package:listview/screen/chartBar.dart';
 import '../models/category_model.dart';
 import 'package:listview/screen/detailCategory.dart';
 
+import '../widget/image_with_top_shadow_widget.dart';
+
 class Home extends StatelessWidget {
 
   final List<double> expense;
@@ -166,7 +168,9 @@ class Home extends StatelessWidget {
               fontWeight: FontWeight.w700,
               color: Colors.white),
             ),
+              background: ImageWithTopShadowWidget(),
           ),
+
           ),
         ],
         // child: Container(

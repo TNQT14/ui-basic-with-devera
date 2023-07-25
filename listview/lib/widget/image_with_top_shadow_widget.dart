@@ -8,7 +8,16 @@ class ImageWithTopShadowWidget extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        Image.asset('bg.jpg', )
+        Image.asset('asset/bg.jpg', fit: BoxFit.cover),
+        Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.pink, Colors.transparent],
+            ),
+          ),
+        ),
       ],
     );
   }
