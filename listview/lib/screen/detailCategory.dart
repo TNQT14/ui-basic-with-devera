@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
-import '../models/expense_model.dart';
 import '../models/category_model.dart';
 
 class Detail extends StatelessWidget {
@@ -50,7 +49,6 @@ class Detail extends StatelessWidget {
             SizedBox(height: 70),
           ],
         ));
-
       }
     return itemList;
   }
@@ -117,7 +115,6 @@ class Detail extends StatelessWidget {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
