@@ -250,6 +250,7 @@ class Home extends StatelessWidget {
               ),
             ),
             flexibleSpace: const FlexibleSpaceBar(
+              centerTitle: true,
               title: Text('Simple Budget', style: TextStyle(fontSize: 24,
               fontWeight: FontWeight.w700,
               color: Colors.white),
