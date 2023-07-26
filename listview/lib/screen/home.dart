@@ -204,7 +204,6 @@ class Home extends StatelessWidget {
         ),
       ),
     );
-
     return bodySimpleBudget;
   }
 
@@ -217,24 +216,6 @@ class Home extends StatelessWidget {
     double screenHeight = screenSize.height;
     // _buildWeekSpendingList();
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.green,
-      //   leading: Icon(Icons.settings,
-      //     color: Colors.white,
-      //     size: 30,),
-      //   title: Container(
-      //       child: Center(
-      //           child: const Text('Simple Budet',
-      //             style: TextStyle(fontSize: 30),
-      //           ))),
-      //   actions: [
-      //     IconButton(onPressed: (){}, icon: Icon(
-      //       Icons.add,
-      //       color: Colors.white,
-      //       size: 30,
-      //     ))
-      //   ],
-      // ),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
