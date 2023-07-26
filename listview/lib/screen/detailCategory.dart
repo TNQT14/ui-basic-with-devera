@@ -35,11 +35,11 @@ class Detail extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     child:  Text('${category.expenses[i].name}',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                   ),
                   Container(
                     child:  Text('-\$${category.expenses[i].cost.toStringAsFixed(2)}',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,
                           color: Colors.red),),
                   ),
                 ],
@@ -95,7 +95,7 @@ class Detail extends StatelessWidget {
                     height: 200,
                     alignment: Alignment.center,
                     child: Text('\$${category.total.toStringAsFixed(2)}/\$${category.maxAmount}',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)
                     ),
                   ),
                    Container(
